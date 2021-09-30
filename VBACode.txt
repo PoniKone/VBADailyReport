@@ -1,0 +1,124 @@
+---------------------------Module--------------------------------------------
+Sub フォーム呼び出し()
+    UserForm1.Show
+    
+End Sub
+
+Sub 上書き保存()
+    'Excelの警告メッセージ表示をfalse
+    Application.DisplayAlerts = False
+    
+    '指定された場所へBookを上書き保存処理
+    ActiveWorkbook.Save
+    ActiveWorkbook.SaveAs "\\192.168.200.200\共有a\02_日報\日報_01_瀬川剛史.xlsm"
+    'Excelの警告メッセージ表示をtrue
+    Application.DisplayAlerts = True
+    
+    MsgBox "上書き保存が完了しました。"
+    'アプリケーションの終了
+    Application.Quit
+    
+    
+End Sub
+
+
+
+
+
+
+-------------------------User Form 1-----------------------------------------
+
+Private Sub ComboBox1_Change()
+
+End Sub
+
+Private Sub CommandButton1_Click()
+    Call Macro1
+    'ユーザーフォームを終了する
+    Unload Me
+    
+End Sub
+
+
+
+
+
+Private Sub CommandButton2_Click()
+    
+    Call Macro2
+    
+End Sub
+
+Private Sub Label1_Click()
+
+End Sub
+
+Private Sub UserForm_Initialize()
+    
+     
+    '研修内容をコンボボックスに登録
+    With ComboBox1
+        .AddItem "訓練導入講習"
+        .AddItem "ｺﾝﾋﾟｭｰﾀ概論"
+        .AddItem "ﾌﾟﾚｾﾞﾝ技法"
+        .AddItem "アルゴリズム"
+        .AddItem "Excel"
+        .AddItem "Webﾍﾟｰｼﾞ作成"
+        .AddItem "画像処理"
+        .AddItem "Webﾌﾟﾛｸﾞﾗﾐﾝｸﾞ基礎"
+        .AddItem "Java基礎"
+        .AddItem "Java活用"
+        .AddItem "就職支援"
+        .AddItem "Webサイト作成演習"
+        .AddItem "PHP開発演習"
+        .AddItem "Java開発演習"
+        .AddItem "職場実習"
+    
+     End With
+     
+     '現在日時を取得しコンボボックスに登録
+        Dim i As Long
+        Dim j As Long
+        For i = 1 To 12
+      ComboBox2.AddItem i
+        Next i
+    '
+    ComboBox2.ListIndex = Month(Date) - 1
+  
+
+        For j = 1 To 31
+      ComboBox3.AddItem j
+         Next j
+     ComboBox3.ListIndex = Day(Date) - 1
+        
+    
+        
+        
+End Sub
+
+Private Sub Label3_Click()
+    UserForm1.Label3.captain = Month(Date) & "月" & Day(Date) & "日"
+
+
+End Sub
+
+
+
+Sub Macro1()
+'
+
+'
+
+'前日分の日報の左側にシートを作成する
+    Sheets(4).Copy Before:=Sheets(5)
+    On Error GoTo ErrLabel
+    
+    
+    Sheets(5).Name = Month(Date) & "月" & Day(Date) & "日"
+    Sheets(5).Activate
+    Range("D3").Value = Month(Date) & "月" & Day(Date) & "日"
+    Range("F3").Value = "瀬川 剛史"
+    Range("B3").Value = ComboBox1.Text
+    Range("C5").Value = "ミカタイプ、" & ComboBox1.Text
+    Range("C14,C23,C32,C41,C50").Value = ComboBox1.Text
+    
