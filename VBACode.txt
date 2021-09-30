@@ -10,7 +10,7 @@ Sub 上書き保存()
     
     '指定された場所へBookを上書き保存処理
     ActiveWorkbook.Save
-    ActiveWorkbook.SaveAs "\\192.168.200.200\共有a\02_日報\日報_01_瀬川剛史.xlsm"
+    ActiveWorkbook.SaveAs "\\保存先URL\Excelブック名.xlsm"
     'Excelの警告メッセージ表示をtrue
     Application.DisplayAlerts = True
     
@@ -117,7 +117,7 @@ Sub Macro1()
     Sheets(5).Name = Month(Date) & "月" & Day(Date) & "日"
     Sheets(5).Activate
     Range("D3").Value = Month(Date) & "月" & Day(Date) & "日"
-    Range("F3").Value = "瀬川 剛史"
+    Range("F3").Value = "名前を入力"
     Range("B3").Value = ComboBox1.Text
     Range("C5").Value = "ミカタイプ、" & ComboBox1.Text
     Range("C14,C23,C32,C41,C50").Value = ComboBox1.Text
