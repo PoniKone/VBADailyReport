@@ -119,6 +119,6 @@ Sub Macro1()
     Range("D3").Value = Month(Date) & "月" & Day(Date) & "日"
     Range("F3").Value = "名前を入力"
     Range("B3").Value = ComboBox1.Text
-    Range("C5").Value = "ミカタイプ、" & ComboBox1.Text
+    Range("C5").Value = "日課を記入(訓練ではタイピング練習をしていた)、" & ComboBox1.Text
     Range("C14,C23,C32,C41,C50").Value = ComboBox1.Text
     
